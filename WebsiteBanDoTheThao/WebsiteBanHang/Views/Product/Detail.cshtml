@@ -1,0 +1,217 @@
+﻿@model WebsiteBanHang.Context.Product
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*Chi tiết sản phẩm*@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#addtocart").click(function () {
+            var model = {};
+            //lấy id sản phẩm
+            model.Id = @Model.Id;
+            // lấy số lượng đặt hàng
+            model.Quantity = $("#ipQuantity").val();
+            debugger;
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddToCart", "Cart")',
+                data:  JSON.stringify(model) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    alert("Thêm giỏ hàng thành công!")
+                    $('#CartCount').text(@Session["count"] + 1);
+                },
+                error: function () {
+                    alert("Lỗi thêm vào giỏ hàng!");
+                }
+            });
+            return false;
+        });
+    });
+</script>
+
+<section class="py-3 bg-light">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Category name</a></li>
+            <li class="breadcrumb-item"><a href="#">Sub category</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Items</li>
+        </ol>
+    </div>
+</section>
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content bg-white padding-y">
+    <div class="container">
+        <!-- ============================ ITEM DETAIL ======================== -->
+        <div class="row">
+            <aside class="col-md-6">
+                <div class="card">
+                    <article class="gallery-wrap">
+                        <div class="img-big-wrap">
+                            <div> <a href="#"><img src="~/Content/images/items/@Model.Avatar"></a></div>
+                        </div> <!-- slider-product.// -->
+                        <div class="thumbs-wrap">
+                            
+                        </div> <!-- slider-nav.// -->
+                    </article> <!-- gallery-wrap .end// -->
+                </div> <!-- card.// -->
+            </aside>
+            <main class="col-md-6">
+                <article class="product-info-aside">
+                    <h2 class="title mt-3">@Model.Name</h2>
+                    <div class="rating-wrap my-3">
+                        <ul class="rating-stars">
+                            <li style="width:80%" class="stars-active">
+                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </li>
+                            <li>
+                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </li>
+                        </ul>
+                        <small class="label-rating text-muted">132 reviews</small>
+                        <small class="label-rating text-success"> <i class="fa fa-clipboard-check"></i> 99 orders </small>
+                    </div> <!-- rating-wrap.// -->
+                    <div class="mb-3">
+                        <var class="price h4">@Model.Price<span>VND</span></var>
+
+                    </div> <!-- price-detail-wrap .// -->
+                    
+                    <p >@Model.ShortDes</p>
+                    <div class="row, border" >
+                        <div class="col-sm-12">
+                            
+                            <h2>Phần mô tả</h2>
+                        </div>
+                        <div class="col-sm-12">
+                            @Model.FullDescription
+                        </div>
+
+                    </div>
+                    <div class="form-row  mt-4">
+                        <div class="form-group col-md-12">
+                            
+                                <input type="number" id="ipQuantity" class="form-control text-center w-100" value="1">
+                            
+                        </div> <!-- col.// -->
+                        <div class="form-group col-md-12">
+                            <a href="#" id="addtocart" class="btn  btn-danger w-100">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="text" h>Thêm vào giỏ hàng</span>
+                            </a>
+                        </div> <!-- col.// -->
+                    </div> <!-- row.// -->
+                </article> <!-- product-info-aside .// -->
+            </main> <!-- col.// -->
+        </div> <!-- row.// -->
+        <!-- ================ ITEM DETAIL END .// ================= -->
+
+    </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name padding-y bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+
+                <h4 class="text-center">More Product</h4>
+                <div class="row mt-3 p-0 text-center pro-box-section">
+                    <div class="col-lg-3 ">
+                        <div class="pro-box border p-0 m-0">
+                            <a href="#"><img src="~/Content/images/items/more2.jpg"></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 ">
+                        <div class="pro-box border p-0 m-0">
+                            <a href="#"><img src="~/Content/images/items/more3.jpg"></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 ">
+                        <div class="pro-box border p-0 m-0">
+                            <a href="#"><img src="~/Content/images/items/more4.jpg"></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 ">
+                        <div class="pro-box border p-0 m-0">
+                            <a href="#"><img src="~/Content/images/items/more5.jpg"></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 ">
+                        <div class="pro-box border p-0 m-0">
+                            <a href="#"><img src="~/Content/images/items/more7.jpg"></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 ">
+                        <div class="pro-box border p-0 m-0">
+                            <a href="#"><img src="~/Content/images/items/more8.jpg"></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 ">
+                        <div class="pro-box border p-0 m-0">
+                            <a href="#"><img src="~/Content/images/items/more9.jpg"></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 ">
+                        <div class="pro-box border p-0 m-0">
+                            <a href="#"><img src="~/Content/images/items/more10.jpg"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+                <aside class="col-md-4">
+                    <div class="box">
+
+                        <h5 class="title-description">Files</h5>
+                        <p>
+                            Lo sport è una parte indispensabile della vita umana. Non solo ci aiuta a fare esercizio,
+                            ma allevia anche lo stress e la fatica dopo una lunga giornata di lavoro. Affinché il
+                            processo di pratica sportiva sia migliore e ottenga l'effetto desiderato, è indispensabile
+                            che l'abbigliamento sportivo adatto sia stampato con slogan impressionanti e unici.
+                        </p>
+                        <h5 class="title-description">Videos</h5>
+
+                        <article class="media mb-3">
+                            <a href="#"><img class="img-sm mr-3" src="~/Content/images/posts/3.jpg"></a>
+                            <div class="media-body">
+                                <h6 class="mt-0"><a href="#">Cách để sử dụng item</a></h6>
+                                <p class="mb-2"> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin </p>
+                            </div>
+                        </article>
+                        <article class="media mb-3">
+
+                            <a href="#"><img class="img-sm mr-3" src="~/Content/images/posts/2.jpg"></a>
+                            <div class="media-body">
+                                <h6 class="mt-0"><a href="#">New tips and tricks</a></h6>
+                                <p class="mb-2"> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin </p>
+                            </div>
+                        </article>
+                        <article class="media mb-3">
+
+                            <a href="#"><img class="img-sm mr-3" src="~/Content/images/posts/1.jpg"></a>
+                            <div class="media-body">
+                                <h6 class="mt-0"><a href="#">New tips and tricks</a></h6>
+                                <p class="mb-2"> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin </p>
+                            </div>
+                        </article>
+
+
+                    </div> <!-- box.// -->
+                </aside> <!-- col.// -->
+            </div> <!-- row.// -->
+
+    </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+<!-- ========================= SECTION SUBSCRIBE END// ========================= -->
